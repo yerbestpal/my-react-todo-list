@@ -1,0 +1,16 @@
+* {
+	font-size: 28px;
+}
+
+.center {
+	margin: auto;
+	width: 50%;
+}
+
+.App {
+	background: skyblue;
+}
+
+.completed-todo {
+	text-decoration: line-through;
+}

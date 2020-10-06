@@ -1,5 +1,6 @@
 import React from "react";
 import Todo from "./components/Todo";
+import CompletedTodo from "./components/CompletedTodo";
 import TodoForm from "./components/TodoForm";
 import "./App.css";
 
@@ -8,6 +9,7 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			todos: [],
+			completedTodos: [],
 			input: "",
 		};
 
@@ -39,14 +41,14 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div className="App">
-				<h1>Todo List</h1>
-				<div>
+			<div className="App center">
+				<div className="todo-container center">
+					<h1>Todo List</h1>
 					<TodoForm
 						handleSubmitTodo={this.handleSubmitTodo}
 						handleChange={this.handleChange}
 					/>
-					<ul>
+					<ul className="incomplete-todos">
 						{this.state.todos.map((value, index) => {
 							return (
 								<Todo
@@ -54,8 +56,17 @@ class App extends React.Component {
 									key={index}
 									index={index}
 									handleDeleteTodo={this.handleDeleteTodo}
+									className="todo"
 								/>
 							);
+						})}
+					</ul>
+
+					<br />
+
+					<ul className="complete-todos">
+						{this.state.completedTodos.map((value) => {
+							return <CompletedTodo value={value} className="completed-todo" />;
 						})}
 					</ul>
 				</div>
