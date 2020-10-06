@@ -80,7 +80,7 @@ class App extends React.Component {
 
 					<ul className="complete-todos">
 						{this.state.completedTodos.map((value) => {
-							return <CompletedTodo value={value} className="completed-todo" />;
+							return <CompletedTodo value={value} />;
 						})}
 					</ul>
 				</div>
