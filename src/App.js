@@ -7,26 +7,34 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tasks: [],
+			todos: [],
 			input: "",
 		};
 
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSubmitTodo = this.handleSubmitTodo.bind(this);
+		this.handleDeleteTodo = this.handleDeleteTodo.bind(this);
 	}
 
 	handleChange(event) {
 		this.setState({ input: event.target.value });
 	}
 
-	handleSubmit(event) {
+	handleSubmitTodo(event) {
 		event.preventDefault();
-		const updatedTasks = this.state.tasks;
-		updatedTasks.push(this.state.input);
+		const updatedTodos = this.state.todos;
+		updatedTodos.push(this.state.input);
 		this.setState({
-			tasks: updatedTasks,
+			todos: updatedTodos,
 		});
-		console.log(this.state.tasks);
+	}
+
+	handleDeleteTodo(index) {
+		const updatedTodos = [...this.state.todos];
+		updatedTodos.splice(index, 1);
+		this.setState({
+			todos: updatedTodos,
+		});
 	}
 
 	render() {
@@ -35,12 +43,19 @@ class App extends React.Component {
 				<h1>Todo List</h1>
 				<div>
 					<TodoForm
-						handleSubmit={this.handleSubmit}
+						handleSubmitTodo={this.handleSubmitTodo}
 						handleChange={this.handleChange}
 					/>
 					<ul>
-						{this.state.tasks.map((value, index) => {
-							return <Todo value={value} key={index} />;
+						{this.state.todos.map((value, index) => {
+							return (
+								<Todo
+									value={value}
+									key={index}
+									index={index}
+									handleDeleteTodo={this.handleDeleteTodo}
+								/>
+							);
 						})}
 					</ul>
 				</div>

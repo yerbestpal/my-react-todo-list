@@ -1,7 +1,12 @@
 import React from "react";
 
-const Todo = (props) => {
-	return <li>{props.value}</li>;
+const Todo = ({ value, index, handleDeleteTodo }) => {
+	return (
+		<li>
+			{value}
+			<button onClick={() => handleDeleteTodo(index)}>Delete</button>
+		</li>
+	);
 };
 
 export default Todo;
