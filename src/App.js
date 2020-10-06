@@ -16,6 +16,7 @@ class App extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmitTodo = this.handleSubmitTodo.bind(this);
 		this.handleDeleteTodo = this.handleDeleteTodo.bind(this);
+		this.handleCompleteTodo = this.handleCompleteTodo.bind(this);
 	}
 
 	handleChange(event) {
@@ -39,6 +40,18 @@ class App extends React.Component {
 		});
 	}
 
+	handleCompleteTodo(index) {
+		// console.log(`incomplete todos: ${this.state.todos}`);
+		const updatedTodos = [...this.state.todos];
+		const completeTodo = updatedTodos.splice(index, 1);
+		const completedTodos = this.state.completedTodos;
+		this.handleDeleteTodo(index);
+		completedTodos.push(completeTodo);
+		this.setState({
+			completedTodos: completedTodos,
+		});
+	}
+
 	render() {
 		return (
 			<div className="App center">
@@ -56,6 +69,7 @@ class App extends React.Component {
 									key={index}
 									index={index}
 									handleDeleteTodo={this.handleDeleteTodo}
+									handleCompleteTodo={this.handleCompleteTodo}
 									className="todo"
 								/>
 							);
